@@ -2,6 +2,7 @@ package org.proyecto.empresaB_rest_server.service.impl;
 
 
 
+
 	import java.io.BufferedInputStream;
 	import java.io.BufferedOutputStream;
 	import java.io.Closeable;
@@ -16,9 +17,7 @@ package org.proyecto.empresaB_rest_server.service.impl;
 	import javax.servlet.http.HttpServletResponse;
 
 	/**
-	 * The Image servlet for serving from absolute path.
-	 * @author BalusC
-	 * @link http://balusc.blogspot.com/2007/04/imageservlet.html
+	proporciona una imagen desde un path absoluto
 	 */
 	public class ImagenServlet extends HttpServlet {
 
@@ -34,91 +33,83 @@ package org.proyecto.empresaB_rest_server.service.impl;
 
 	    public void init() throws ServletException {
 
-	        // Define base path somehow. You can define it as init-param of the servlet.
+	        // se define el path
 	        this.imagePath = "C:\\imagenes\\empresaB_rest_server\\";
 
-	        // In a Windows environment with the Applicationserver running on the
-	        // c: volume, the above path is exactly the same as "c:\images".
-	        // In UNIX, it is just straightforward "/images".
-	        // If you have stored files in the WebContent of a WAR, for example in the
-	        // "/WEB-INF/images" folder, then you can retrieve the absolute path by:
-	        // this.imagePath = getServletContext().getRealPath("/WEB-INF/images");
+
 	    }
 
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException
 	    {
-	        // Get requested image by path info.
+	        // Get requested imagen por el pathinfo.
 	        String requestedImage = request.getPathInfo();
 
-	        // Check if file name is actually supplied to the request URI.
+	        // Checkeamos el nombre.
 	        if (requestedImage == null) {
-	            // Do your thing if the image is not supplied to the request URI.
-	            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
+	            // si no existe mandamos no found.
+	            
 	            response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
 	            return;
 	        }
 
-	        // Decode the file name (might contain spaces and on) and prepare file object.
+	        //se prepara el ogjeto.
 	        File image = new File(imagePath, URLDecoder.decode(requestedImage, "UTF-8"));
 
-	        // Check if file actually exists in filesystem.
+	        // se comprueba que exista en el sistema de ficheros.
 	        if (!image.exists()) {
-	            // Do your thing if the file appears to be non-existing.
-	            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
+	            //si no existe mandamos not-found.
 	            response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
 	            return;
 	        }
 
-	        // Get content type by filename.
+	        // compobanmos el contenttype
 	        String contentType = getServletContext().getMimeType(image.getName());
 
-	        // Check if file is actually an image (avoid download of other files by hackers!).
-	        // For all content types, see: http://www.w3schools.com/media/media_mimeref.asp
+	        // comprobamos que sea una imagen
 	        if (contentType == null || !contentType.startsWith("image")) {
-	            // Do your thing if the file appears not being a real image.
-	            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
+	            //si no lo es-not-found
 	            response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
 	            return;
 	        }
 
-	        // Init servlet response.
+	        // Iniciamos el servlet response.
 	        response.reset();
 	        response.setBufferSize(DEFAULT_BUFFER_SIZE);
 	        response.setContentType(contentType);
 	        response.setHeader("Content-Length", String.valueOf(image.length()));
 	        response.setHeader("Content-Disposition", "inline; filename=\"" + image.getName() + "\"");
 
-	        // Prepare streams.
+	        // Preparamos streams.
 	        BufferedInputStream input = null;
 	        BufferedOutputStream output = null;
 
 	        try {
-	            // Open streams.
+	            //Abrimos streams.
 	            input = new BufferedInputStream(new FileInputStream(image), DEFAULT_BUFFER_SIZE);
 	            output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
 
-	            // Write file contents to response.
+	            // Write escribimos el fichero en el response.
 	            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 	            int length;
 	            while ((length = input.read(buffer)) > 0) {
 	                output.write(buffer, 0, length);
 	            }
 	        } finally {
-	            // Gently close streams.
+	            // cerramos streams.
 	            close(output);
 	            close(input);
 	        }
 	    }
 
-	    // Helpers (can be refactored to public utility class) ----------------------------------------
+	    
 
 	    private static void close(Closeable resource) {
 	        if (resource != null) {
 	            try {
 	                resource.close();
 	            } catch (IOException e) {
-	                // Do your thing with the exception. Print it, log it or mail it.
+	                //primtamos las excepciones producidas.
 	                e.printStackTrace();
 	            }
 	        }

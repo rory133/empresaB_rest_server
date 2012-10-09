@@ -245,5 +245,6 @@
         </configuration>
       </plugin>
     </plugins>
+    <finalName>empresaB_rest_server</finalName>
   </build>
 </project>
