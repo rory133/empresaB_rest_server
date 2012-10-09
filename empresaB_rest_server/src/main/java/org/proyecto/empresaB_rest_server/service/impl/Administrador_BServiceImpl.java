@@ -1,0 +1,64 @@
+package org.proyecto.empresaB_rest_server.service.impl;
+
+
+import java.util.List;
+
+import org.proyecto.empresaB_rest_server.dao.Administrador_BDao;
+import org.proyecto.empresaB_rest_server.model.Administrador_B;
+import org.proyecto.empresaB_rest_server.model.Usuario_B;
+import org.proyecto.empresaB_rest_server.service.Administrador_BService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+@Service("administradorService")
+public class Administrador_BServiceImpl implements Administrador_BService{
+	
+	@Autowired
+	Administrador_BDao administrador_BDao;
+	
+
+
+	public void setAdministrador_BDao(Administrador_BDao administrador_BDao) {
+		this.administrador_BDao = administrador_BDao;
+	}
+	
+	//@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED)
+	public void save(Administrador_B administrador_B) {
+		this.administrador_BDao.save(administrador_B);
+		
+	}
+
+	public void update(Administrador_B administrador_B) {
+		administrador_BDao.update(administrador_B);
+		
+	}
+
+	public void delete(Administrador_B administrador_B) {
+		administrador_BDao.delete(administrador_B);
+		
+	}
+	
+	@Transactional
+	public Administrador_B findByAdministrador_BIdAdministrador_b(String Administrador_BIdAdministrador_b) {
+		
+		return administrador_BDao.findByAdministrador_BIdAdministrador_b(Administrador_BIdAdministrador_b);
+	}
+	
+	@Transactional
+	public Usuario_B findByAdministrador_B_login_usuario_b(String administrador_B_login_usuario_b) {
+		
+		return administrador_BDao.findByAdministrador_B_login_usuario_b(administrador_B_login_usuario_b);
+	}
+	
+	@Transactional
+	public List<Administrador_B> findAll (){
+		return administrador_BDao.findAll();
+	}
+	
+	
+
+}

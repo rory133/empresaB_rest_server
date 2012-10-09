@@ -1,0 +1,110 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+    
+<tiles-definitions>
+	<definition template="/WEB-INF/tiles/layout.jsp" name="base.definition"> 
+		<put-attribute name="title" value=""/> 
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"/> 
+		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jsp"/>
+		 <put-attribute name="body" value=""/> 
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+	
+	 </definition>
+	 
+	<definition template="/WEB-INF/tiles/layout.jsp" name="base.soloBody"> 
+		<put-attribute name="title" value=""/> 
+		<put-attribute name="header" value=""/> 
+		<put-attribute name="menu" value=""/>
+		 <put-attribute name="body" value=""/> 
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+	
+	 </definition>
+	 
+	 
+	 
+	 <definition name="home" extends="base.definition">
+		 <put-attribute name="title" value="home"/>
+		 <put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
+	 </definition>	 
+	 
+	 <definition name="producto_b/listaProductos" extends="base.definition">
+		 <put-attribute name="title" value="listaProductos"/>
+		 <put-attribute name="body" value="/WEB-INF/views/producto_b/listaProductos.jsp"/>
+    
+     </definition>
+    	 
+	  <definition name="producto_b/edit" extends="base.definition">
+		 <put-attribute name="title" value="crearProducto_B"/>
+		 <put-attribute name="body" value="/WEB-INF/views/producto_b/edit.jsp"/>
+      </definition>
+      
+      <definition name="producto_b/modificar" extends="base.definition">
+		 <put-attribute name="title" value="Modificar producto_b"/>
+		 <put-attribute name="body" value="/WEB-INF/views/producto_b/modificar.jsp"/>
+      </definition>
+      
+      <definition name="error" extends="base.definition">
+		 <put-attribute name="title" value="errores"/>
+		 <put-attribute name="body" value="/WEB-INF/spring/GenericExceptionPage.jsp"/>
+      </definition>
+     
+     <definition name="cliente_b/edit" extends="base.definition">
+		 <put-attribute name="title" value="crearCliente_B"/>
+		 <put-attribute name="body" value="/WEB-INF/views/cliente_b/edit.jsp"/>
+      </definition>
+      	 <definition name="cliente_b/listaClientes" extends="base.definition">
+		 <put-attribute name="title" value="listaClientes"/>
+		 <put-attribute name="body" value="/WEB-INF/views/cliente_b/listaClientes.jsp"/>
+	 </definition>
+		 
+	  <definition name="cliente_b/modificar" extends="base.definition">
+		 <put-attribute name="title" value="Modificar cliente_b"/>
+		 <put-attribute name="body" value="/WEB-INF/views/cliente_b/modificar.jsp"/>
+      </definition>
+    
+    
+      <definition name="administrador_b/edit" extends="base.definition">
+		 <put-attribute name="title" value="crearAdministrador_B"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/edit.jsp"/>
+      </definition>
+      	 <definition name="administrador_b/listaAdministradores" extends="base.definition">
+		 <put-attribute name="title" value="listaAdministradores"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/listaAdministradores.jsp"/>
+	 </definition>
+		 
+	  <definition name="administrador_b/modificar" extends="base.definition">
+		 <put-attribute name="title" value="Modificar administrador_b"/>
+		 <put-attribute name="body" value="/WEB-INF/views/administrador_b/modificar.jsp"/>
+      </definition>
+      
+    
+     
+      <definition name="views/login" extends="base.definition">
+		 <put-attribute name="title" value="LOGIN"/>
+		 <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
+      </definition>
+      
+      
+      
+      <definition name="carro_b/verCarroActual" extends="base.definition">
+		 <put-attribute name="title" value="TU CARRO"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/verCarroActual.jsp"/>
+      </definition>
+      
+            <definition name="carro_b/verPedidos" extends="base.definition">
+		 <put-attribute name="title" value="LISTA PEDIDOS"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/listaCarrosPedidos.jsp"/>
+      </definition>
+      
+      <definition name="carro_b/verDetallesCarro" extends="base.soloBody">
+		 <put-attribute name="title" value="TU CARRO"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/verUnCarro.jsp"/>
+      </definition>
+      
+      <definition name="carro_b/datosTarjeta" extends="base.soloBody">
+		 <put-attribute name="title" value="datos Tarjeta"/>
+		 <put-attribute name="body" value="/WEB-INF/views/carro_b/datosTarjeta.jsp"/>
+      </definition>
+           
+</tiles-definitions>
