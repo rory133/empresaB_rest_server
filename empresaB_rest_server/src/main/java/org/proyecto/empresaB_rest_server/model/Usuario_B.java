@@ -22,9 +22,12 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 
 /*@Entity
 @Table(name = "usuario_b")*/
+@XStreamAlias("usuario-xml")
 @XmlRootElement(name="usuario_b")
 @Entity
 @Table(name = "usuario_b")
@@ -96,7 +99,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 		return idusuarios_b;
 	}
 	
-	//@XmlElement
+	@XmlElement
 	public void setIdusuarios_b(Integer idusuarios_b) {
 		this.idusuarios_b = idusuarios_b;
 	}
@@ -104,7 +107,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getDni_nif_b() {
 		return dni_nif_b;
 	}
-	//@XmlElement
+	@XmlElement
 	public void setDni_nif_b(String dni_nif_b) {
 		this.dni_nif_b = dni_nif_b;
 	}

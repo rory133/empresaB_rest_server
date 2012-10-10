@@ -8,42 +8,173 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	
-
-
-
-
-
-	
    <!-- indicarle al controlador como gestionar recursos estaticos -->
  	<mvc:resources location="WEB-INF/resources/" mapping="/resources/**"/>
  	
  	
- 	
+ 	<!-- configuramos el modelo de programacion @Controller -->
+	<mvc:annotation-driven/>
+	
+	
+	 <context:component-scan base-package="org.proyecto.empresaB_rest_server" /> 
+   	 <context:annotation-config />
+	
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+  <property name="order" value="1" />
+  <property name="mediaTypes">
+   <map>
+    <entry key="json" value="application/json" />
+    <entry key="xml" value="application/xml" />
+   </map>
+  </property>
+
+  <property name="defaultViews">
+   <list>
+    <!-- JSON View -->
+    <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+    <!-- XML View -->
+    <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+     <constructor-arg>
+      <bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+       <property name="autodetectAnnotations" value="true"/>
+      </bean>
+     </constructor-arg>
+    </bean>
+   </list>
+  </property>
+ </bean>
+	
+	
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    <property name="ignoreAcceptHeader" value="false" />
+    <property name="favorPathExtension" value="true" />
+    <property name="order" value="1" />
+    <property name="mediaTypes">
+        <map>
+            <entry key="xml" value="application/xml" />
+            <entry key="json" value="application/json" />
+        </map>
+    </property>
+    <property name="defaultViews">
+        <list>
+            <ref bean="xmlView"/>
+            <ref bean="jsonView"/>
+        </list>
+    </property>
+</bean>
+
+<bean id="jsonView"
+      class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+    <property name="contentType" value="application/json;charset=UTF-8"/>
+    <property name="disableCaching" value="false"/>
+</bean>
+
+<bean id="xmlView"
+      class="org.springframework.web.servlet.view.xml.MarshallingView">
+    <property name="contentType" value="application/xml;charset=UTF-8"/>
+  		<property name="contentType" value="application/xml"/>
+    <constructor-arg>
+        <ref bean="xstreamMarshaller"/>
+    </constructor-arg>
+</bean>
+
+
+ -->
 
 
 
 
+<!-- <bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"> 
+    <property name="autodetectAnnotations" value="true" />-->
+    
+    <bean id="xstreamMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
+    <property name="packagesToScan" value="org.proyecto.empresaB_rest_server.model.*" />
+</bean>
+
+
+<!-- <bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+    <property name="autodetectAnnotations" value="true" />
+    <property name="org.proyecto.empresaB_rest_server.model.Cliente_B"/>
+</bean>
+	 -->
+	<!--  <bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/> -->
+	 
+	 
+	 
+	 
+<!-- 	 
+<bean id="xstreamMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+				   <property name="classesToBeBound">
+					<list>
+					   <value>org.proyecto.empresaB_rest_server.model.Cliente_B</value>
+					    <value>org.proyecto.empresaB_rest_server.model.Usuario_B</value>
+					    
+					</list>
+				   </property>
+			</bean>
+	
+ -->
+	
+	
+	
+	
+	
+	
+<!-- 
+
+
+comentado
 <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 	<property name="mediaTypes">
 		<map>
 			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
 		</map>
 	</property>
-<!-- 	<property name="viewResolvers">
+	
+ 	<property name="viewResolvers">
 		<list>
+		        
+  	
+		<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+		
 			<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 				<property name="prefix" value="/WEB-INF/views/" />
 				<property name="suffix" value=".jsp" />
+				
 			</bean>
+			
 		</list>
-	</property> -->
+	</property>
+	
+	
 	<property name="defaultViews">
 		<list>
 			<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			
+			
+			<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+			<constructor-arg>
+				<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+				   <property name="classesToBeBound">
+					<list>
+					   <value>org.proyecto.empresaB_rest_server.model.Cliente_B</value>
+					    <value>org.proyecto.empresaB_rest_server.model.Usuario_B</value>
+					    <value>org.proyecto.empresaB_rest_server.model.ListaClientes_B</value>
+					</list>
+				   </property>
+			</bean>
+			</constructor-arg>
+		  </bean>
+			
 		</list>
 	</property>
 </bean>
-
+fin comentado
+ -->
 <!--  	
  	
 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -89,12 +220,10 @@ class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
  	
    
    
-    <!-- configuramos el modelo de programacion @Controller -->
-	<mvc:annotation-driven/>
+
 	
 	
-   <context:component-scan base-package="org.proyecto.empresaB_rest_server" /> 
-    <context:annotation-config />
+
 <!--  	<context:spring-configured/> -->
 
 	 

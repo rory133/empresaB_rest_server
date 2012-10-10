@@ -18,7 +18,11 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-@XmlRootElement(name="cliente_b")
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+//@XStreamAlias("clientes")
+@XStreamAlias("clientes-xml")
+@XmlRootElement(name="clientes")
 @Entity
 @Table(name = "cliente_b")
 @PrimaryKeyJoinColumn(name="IDUSUARIOS_B")
@@ -28,7 +32,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	@Column(name = "FECHA_ALTA_B")
 	private Date fecha_alta_b;
 	 
-	
+	@XStreamAlias("direccion")
 	@Size(min = 2, max = 15, message= "tienes que introducir una direccion")
 	@Column(name = "DIRECCION_B")
 	private String direccion_b;
@@ -40,6 +44,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	@Column(name = "CODIGOPOSTAL_B")
 	private String codigopostal_b;
 	
+	@XStreamOmitField
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente_b")
 	private Set<Carro_B> carro_b = new HashSet<Carro_B>(0);
@@ -71,7 +76,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 
 
 
-	//@XmlElement
+	@XmlElement
 	public void setDireccion_b(String direccion_b) {
 		this.direccion_b = direccion_b;
 	}
