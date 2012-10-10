@@ -13,8 +13,11 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.model.Cliente_B;
+import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
+import org.proyecto.empresaB_rest_server.model.ListaUsuarios_B;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
+import org.proyecto.empresaB_rest_server.service.Cliente_BService;
 import org.proyecto.empresaB_rest_server.service.impl.Cliente_BServiceImpl;
 import org.proyecto.empresaB_rest_server.service.impl.Productos_BServiceImpl;
 import org.proyecto.empresaB_rest_server.util.ListaProvincias;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,8 +41,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/clientes")
 public class ClienteController {
 	
+/*	@Autowired
+	private Cliente_BServiceImpl cliente_BServiceImpl;*/
+	
 	@Autowired
-	private Cliente_BServiceImpl cliente_BServiceImpl;
+	private Cliente_BService cliente_BServiceImpl;
 	
 	@Autowired
 	private Productos_BServiceImpl productos_BServiceImpl;
@@ -113,7 +120,7 @@ public class ClienteController {
 	
 	
 	
-	@RequestMapping(value="/admin/listado",method=RequestMethod.GET)
+/*	@RequestMapping(value="/admin/listado",method=RequestMethod.GET)
 	public ModelAndView listadoClientes_B(){
 		List<Cliente_B> lista =cliente_BServiceImpl.findAll();
 		logger.info("en listadoProductos_B2*");
@@ -122,7 +129,49 @@ public class ClienteController {
 		
 
 	   return new ModelAndView("cliente_b/listaClientes","clientes", lista);
+	}*/
+	
+	//, headers={"Accept=text/xml, text/html, application/json, application/xml"}
+	
+/*	
+	@RequestMapping(value="/listado",method=RequestMethod.GET)	
+	public @ResponseBody  ListaClientes_B listadoClientes_B(){
+		logger.info("en listaClientes REST*");
+		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
+		logger.info("tamaño clienetes:  "+clientes.size());
+		ListaClientes_B result =new ListaClientes_B();		
+		result.setClientes_b(clientes);
+		logger.info("tamaño result  "+result.getClientes_b().size());
+	   return result;
 	}
+	*/
+	
+	
+	///funicona con curl
+	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers = "Accept=application/json")
+	public @ResponseBody  List<Cliente_B> listadoClientes_B(){
+		logger.info("en listaClientes REST*");
+		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
+		logger.info("tamaño clienetes:  "+clientes.size());
+	
+
+	   return clientes;
+	}
+	
+/*	
+	//funciona en navegador
+	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers = "Accept=application/json")	
+	public @ResponseBody  ListaClientes_B listadoClientes_B(){
+		logger.info("en listaClientes REST*");
+		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
+		logger.info("tamaño clienetes:  "+clientes.size());
+		ListaClientes_B result =new ListaClientes_B();		
+		result.setClientes_b(clientes);
+		logger.info("tamaño result  "+result.getClientes_b().size());
+	   return result;
+	}
+	
+	*/
 	
 	
 	@RequestMapping(value="/cliente/edit",method=RequestMethod.GET)

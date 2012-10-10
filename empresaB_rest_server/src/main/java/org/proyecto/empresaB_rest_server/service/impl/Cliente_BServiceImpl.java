@@ -2,6 +2,7 @@ package org.proyecto.empresaB_rest_server.service.impl;
 
 import java.util.List;
 
+import org.proyecto.empresaB_rest_server.bo.Cliente_BBo;
 import org.proyecto.empresaB_rest_server.dao.Cliente_BDao;
 import org.proyecto.empresaB_rest_server.model.Cliente_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
@@ -18,7 +19,8 @@ public class Cliente_BServiceImpl implements Cliente_BService{
 	
 	@Autowired
 	Cliente_BDao cliente_BDao;
-	
+	@Autowired
+	Cliente_BBo cliente_BBo;
 
 
 	public void setCliente_BDao(Cliente_BDao cliente_BDao) {
@@ -56,7 +58,8 @@ public class Cliente_BServiceImpl implements Cliente_BService{
 	
 	@Transactional
 	public List<Cliente_B> findAll (){
-		return cliente_BDao.findAll();
+		//return cliente_BDao.findAll();
+		return cliente_BBo.findAll();
 	}
 	
 	

@@ -12,25 +12,31 @@
 
 <!--   <http auto-config="true">  -->
 <!-- <http use-expressions="true"> -->
+
+<!-- 11
+
 	<http auto-config="true" use-expressions="true">
 
 		<intercept-url pattern="/index.jsp" access="permitAll" />		
 		<intercept-url pattern="/clientes/cliente/**" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/clientes/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/clientes/" access="permitAll" />
-		<!-- <intercept-url pattern="/productos/listado" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" /> -->
+		<intercept-url pattern="/productos/listado" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/productos/listado" access="permitAll" /> 
 		<intercept-url pattern="/aa" access="hasRole ('ROLE_CLIENTE') or hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/productos/admin/**" access="hasRole('ROLE_ADMIN')" />
-    	<!-- <intercept-url pattern="/**" access="denyAll" /> -->
-<!--     <form-login login-page="/login" default-target-url="/welcome" -->
+    	<intercept-url pattern="/**" access="denyAll" />
+    <form-login login-page="/login" default-target-url="/welcome"
     <form-login login-page="/login" default-target-url="/productos/listado"
 			authentication-failure-url="/loginfailed" />
-	<!-- 	<logout logout-success-url="/welcome" /> -->
+		<logout logout-success-url="/welcome" />
 		<logout logout-success-url="/productos/listado" />
     
-    	<!-- <form-login /> -->
+    	<form-login />
  </http>
+ 
+ 11 -->
+ 
     
 <!--         <intercept-url pattern="/login*"   filters="none" />
         <intercept-url pattern="/logout*"  filters="none" />
@@ -70,6 +76,7 @@
             	select u.login_usuario_b, u.authority FROM usuario_b u 
             	where u.login_usuario_b=? " 
            />
+            
             
  		</authentication-provider>
 	</authentication-manager>         

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 import javax.persistence.Column;
@@ -14,7 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+@XmlRootElement(name="cliente_b")
 @Entity
 @Table(name = "cliente_b")
 @PrimaryKeyJoinColumn(name="IDUSUARIOS_B")
@@ -36,6 +40,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	@Column(name = "CODIGOPOSTAL_B")
 	private String codigopostal_b;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente_b")
 	private Set<Carro_B> carro_b = new HashSet<Carro_B>(0);
 	
@@ -52,7 +57,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 	public Date getFecha_alta_b() {
 		return fecha_alta_b;
 	}
-
+	@XmlElement
 	public void setFecha_alta_b(Date fecha_alta_b) {
 		this.fecha_alta_b = fecha_alta_b;
 	}
@@ -66,7 +71,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 
 
 
-
+	//@XmlElement
 	public void setDireccion_b(String direccion_b) {
 		this.direccion_b = direccion_b;
 	}
@@ -80,7 +85,7 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 
 
 
-
+	//@XmlElement
 	public void setProvincia_b(String provincia_b) {
 		this.provincia_b = provincia_b;
 	}
@@ -94,14 +99,14 @@ public class Cliente_B  extends Usuario_B implements Serializable {
 
 
 
-
+	//@XmlElement
 	public void setCodigopostal_b(String codigopostal_b) {
 		this.codigopostal_b = codigopostal_b;
 	}
 
 
 
-
+	//@XmlElement
 	public Set<Carro_B> getCarro_b() {
 		return carro_b;
 	}

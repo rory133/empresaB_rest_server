@@ -15,6 +15,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.NumberFormat;
@@ -23,7 +25,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 /*@Entity
 @Table(name = "usuario_b")*/
-
+@XmlRootElement(name="usuario_b")
 @Entity
 @Table(name = "usuario_b")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -94,6 +96,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 		return idusuarios_b;
 	}
 	
+	//@XmlElement
 	public void setIdusuarios_b(Integer idusuarios_b) {
 		this.idusuarios_b = idusuarios_b;
 	}
@@ -101,7 +104,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getDni_nif_b() {
 		return dni_nif_b;
 	}
-	
+	//@XmlElement
 	public void setDni_nif_b(String dni_nif_b) {
 		this.dni_nif_b = dni_nif_b;
 	}
@@ -111,7 +114,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getLogin_usuario_b() {
 		return login_usuario_b;
 	}
-
+	@XmlElement
 	public void setLogin_usuario_b(String login_usuario_b) {
 		this.login_usuario_b = login_usuario_b;
 	}
@@ -119,7 +122,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getPassword_b() {
 		return password_b;
 	}
-
+	//@XmlElement
 	public void setPassword_b(String password_b) {
 		this.password_b = password_b;
 	}
@@ -127,7 +130,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getNombre_b() {
 		return nombre_b;
 	}
-	
+	//@XmlElement
 	public void setNombre_b(String nombre_b) {
 		this.nombre_b = nombre_b;
 	}
@@ -135,7 +138,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getApellidos_b() {
 		return apellidos_b;
 	}
-	
+	//@XmlElement
 	public void setApellidos_b(String apellidos_b) {
 		this.apellidos_b = apellidos_b;
 	}
@@ -143,7 +146,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getEmail_b() {
 		return email_b;
 	}
-	
+	//@XmlElement
 	public void setEmail_b(String email_b) {
 		this.email_b = email_b;
 	
@@ -152,7 +155,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public String getAUTHORITY() {
 	return AUTHORITY;
 	}
-
+	@XmlElement
 	public void setAUTHORITY(String aUTHORITY) {
 		AUTHORITY = aUTHORITY;
 	}
@@ -160,7 +163,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 	public Boolean getENABLED() {
 		return ENABLED;
 	}
-
+	@XmlElement
 	public void setENABLED(Boolean eNABLED) {
 		ENABLED = eNABLED;
 	}
