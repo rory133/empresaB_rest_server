@@ -144,7 +144,7 @@ public class ClienteController {
 	   return result;
 	}
 	*/
-	@RequestMapping(value="/clientes",method=RequestMethod.GET)
+	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers={"Accept=application/xml, application/json"})
 	
 	public  List<Cliente_B> listadoClientes_B(){
 		logger.info("en listaClientes REST*");

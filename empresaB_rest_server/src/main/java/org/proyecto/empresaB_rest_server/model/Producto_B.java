@@ -23,9 +23,12 @@ import javax.validation.constraints.*;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 
+@XStreamAlias("productos-xml")
 @Entity
 @Table(name = "producto_b")
 public class Producto_B implements Serializable{
@@ -52,7 +55,7 @@ public class Producto_B implements Serializable{
 	   private List<Producto_BSeleccionado> productos_b_seleccionados=new ArrayList<Producto_BSeleccionado>(0);
 	     */        
 	  
-	  
+	  @XStreamOmitField
 	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto_b")
 	  private Set<Producto_BSeleccionado> productos_b_seleccionados=new HashSet<Producto_BSeleccionado>(0);
 
