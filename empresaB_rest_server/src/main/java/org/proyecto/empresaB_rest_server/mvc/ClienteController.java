@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,7 +76,7 @@ public class ClienteController {
 	
 	
 	
-	
+/*	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView addCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result)throws Exception {
 
@@ -100,9 +101,9 @@ public class ClienteController {
 		cliente_BServiceImpl.save(cliente_b);
 
 		//return new ModelAndView("redirect:listado");
-		/*return new ModelAndView("home");*/
+		return new ModelAndView("home");
 		
-		/*return new ModelAndView("producto_b/listaProductos");*/
+		return new ModelAndView("producto_b/listaProductos");
 		
 		
 		String content="apreciado usuario gracias por darse de alta en nuestra página ahora pordrá realizar los pedidos que desee";
@@ -116,7 +117,7 @@ public class ClienteController {
 		
 }
 	
-	
+*/	
 	
 	
 	
@@ -146,6 +147,36 @@ public class ClienteController {
 	   return result;
 	}
 	*/
+	
+	
+	
+	
+	@RequestMapping(value="/cliente",
+					method = RequestMethod.POST,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody void addCliente_B_form(@RequestBody Cliente_B cliente_b) {
+
+		
+		logger.info("inicio de addCliente_B en servidor####### ");
+	
+	
+		
+		cliente_b.setFecha_alta_b(new Date());
+		cliente_b.setAUTHORITY("ROLE_CLIENTE");
+		cliente_b.setENABLED(true);
+		logger.info("se ha sumado cliente en servidor####### "+cliente_b.getNombre_b());
+		cliente_BServiceImpl.save(cliente_b);
+		
+		logger.info("se envia correo de bienvenida en servidor####### a"+cliente_b.getNombre_b());
+		String content="apreciado usuario gracias por darse de alta en nuestra página ahora pordrá realizar los pedidos que desee";
+		String subject="realizada correctamente alta en empresa_b";		
+		mail.sendMail(cliente_b.getLogin_usuario_b(), content, cliente_b.getEmail_b(), subject);
+
+		
+}
+	
+
+	
 	
 	
 @RequestMapping(value="/clientes",method=RequestMethod.GET, headers="Accept=application/xml, application/json")
