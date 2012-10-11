@@ -15,20 +15,29 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 
 
 /*@Entity
 @Table(name = "usuario_b")*/
-@XStreamAlias("usuario-xml")
-@XmlRootElement(name="usuario_b")
+//@XStreamAlias("usuario-xml")
+//@XmlRootElement(name="usuario_b")
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@JSONConfigurable
+@XmlTransient
 @Entity
 @Table(name = "usuario_b")
 @Inheritance(strategy=InheritanceType.JOINED)

@@ -20,6 +20,9 @@
    	 <context:annotation-config />
 	
 	
+	
+<!-- 	
+	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
   <property name="order" value="1" />
   <property name="mediaTypes">
@@ -31,10 +34,10 @@
 
   <property name="defaultViews">
    <list>
-    <!-- JSON View -->
+    JSON View
     <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
-    <!-- XML View -->
+    XML View
     <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
      <constructor-arg>
       <bean class="org.springframework.oxm.xstream.XStreamMarshaller">
@@ -47,7 +50,7 @@
  </bean>
 	
 	
-
+ -->
 
 
 
