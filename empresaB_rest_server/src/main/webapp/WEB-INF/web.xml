@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="empresaB" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>empresaB_rest_server</display-name>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/empresaB-servlet.xml, /WEB-INF/empresa_b-security.xml </param-value>
+    <param-value>/WEB-INF/empresaB_rest_server-servlet.xml, /WEB-INF/empresaB_rest_server-security.xml </param-value>
   </context-param>
+<context-param>
+<param-name>webAppRootKey</param-name>
+<param-value>empresaB_rest_server.root</param-value>
+</context-param>
   <context-param>
     <param-name>log4jConfigLocation</param-name>
     <param-value>/WEB-INF/resources/log4j.properties</param-value>
@@ -18,7 +22,7 @@
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>
-				/WEB-INF/applicationContext.xml
+				/WEB-INF/empresaB_rest_server-applicationContext.xml
 			</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
