@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -148,9 +149,25 @@ public class ClienteController {
 	}
 	*/
 	
-	
-	
-	
+	//actualizamos un cliente
+	@RequestMapping(value="/cliente/{id}",
+			method = RequestMethod.PUT,
+			headers="Accept=application/xml, application/json")
+public @ResponseBody void updateCliente(@PathVariable ("id") String id, @RequestBody Cliente_B cliente_b) {
+
+
+		logger.info("inicio de updateCliente_B en servidor####### ");
+
+		cliente_BServiceImpl.update(cliente_b);
+
+		logger.info("se envia correo de informacion de actualizacion en servidor####### a"+cliente_b.getNombre_b());
+		String content="apreciado usuario se ha procedido a a actualizar sus datos en nuestra base de datos";
+		String subject="realizada correctamente actualizació en empresa_b";		
+		mail.sendMail(cliente_b.getLogin_usuario_b(), content, cliente_b.getEmail_b(), subject);
+
+
+}
+	//creamos un nuevo cliente
 	@RequestMapping(value="/cliente",
 					method = RequestMethod.POST,
 					headers="Accept=application/xml, application/json")
@@ -178,11 +195,13 @@ public class ClienteController {
 
 	
 	
-	
-@RequestMapping(value="/clientes",method=RequestMethod.GET, headers="Accept=application/xml, application/json")
+	//devolvemos una lista con todos los clientes
+@RequestMapping(value="/clientes",
+				method=RequestMethod.GET, 
+				headers="Accept=application/xml, application/json")
 	
 	public @ResponseBody  ListaClientes_B listadoClientes_B(){
-		logger.info("en listaClientes REST*");
+		logger.info("en listaClientes REST server ####");
 		//List<Cliente_B> clientes_b=cliente_BServiceImpl.findAll();
 
 		ListaClientes_B lista=new ListaClientes_B();
@@ -332,6 +351,60 @@ public class ClienteController {
 	
 	
 	}
+	
+	
+	//buscamos y devolvemos un clientes por su login
+	@RequestMapping(value="/clienteLogin/{login}",
+			method = RequestMethod.GET,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody Cliente_B getClientePorLogin(@PathVariable("login")String  login){
+		
+		logger.info(" en getClienteHTML por login  ##### " +login);
+		
+		
+		Integer id=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b();
+		logger.info(" en getClienteHTML por login  #####  el id obtenido con cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b() es "  +id);
+		
+		Cliente_B clientTemp= cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
+		
+		logger.info("en getClienteHTML por login  ##### imprimo nombre cliente optendio con cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id)); "+clientTemp.getNombre_b());
+		
+		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
+		return clientTemp;
+
+
+	
+	}
+	//buscamos y devolvemos un clientes por su id
+	@RequestMapping(value="/clienteId/{id}"
+			, method = RequestMethod.GET,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody Cliente_B getClientePorId(@PathVariable("id")String  id){
+		
+		logger.info(" en getClienteHTML por id  ##### " +id);
+		
+		Cliente_B clientTemp= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		
+		logger.info("en getClienteHTML por login  ##### imprimo nombre cliente optendio con cliente_BServiceImpl.findByCliente_BIdCliente_b(id); "+clientTemp.getNombre_b());
+		
+		
+		return clientTemp;
+		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		
+		
+		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
+
+		//return new ModelAndView("redirect:../edit?id="+String.valueOf(id));
+		//return new ModelAndView("redirect:../edit?"+id);
+	
+	
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/cliente/modificarMiCuenta_B/", method = RequestMethod.GET)
