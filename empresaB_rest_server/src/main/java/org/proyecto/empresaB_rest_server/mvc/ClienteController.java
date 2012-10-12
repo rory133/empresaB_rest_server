@@ -430,7 +430,23 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	
 	}
 	
+	@RequestMapping(value="/cliente/{id}"
+			, method = RequestMethod.DELETE,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody void delCliente_B_form(@PathVariable("id")String  id){
+		logger.info(" en getClienteHTML DELETE por id  ##### " +id);
+		
+		Cliente_B cliente_b= new Cliente_B();
+		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
+		logger.info(" en getClienteHTML DELETE por id ya encontrado cliente  ##### ");
 	
+		cliente_BServiceImpl.delete(cliente_b);
+		logger.info(" en getClienteHTML DELETE por id ya borrado cliente  ##### ");
+		logger.info("##### borrando cliente : ");
+	}
+	
+	
+/*	
 	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delCliente_B_form(String id){
 		logger.info(" en borrrar cliente ");
@@ -445,6 +461,6 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		return new ModelAndView("redirect:listado");
 
 }
-	
+*/	
 
 }
