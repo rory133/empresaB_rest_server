@@ -383,7 +383,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	
 	}
 	//buscamos y devolvemos un clientes por su id
-	@RequestMapping(value="/clienteId/{id}"
+	@RequestMapping(value="/cliente/{id}"
 			, method = RequestMethod.GET,
 			headers="Accept=application/xml, application/json")
 	public @ResponseBody Cliente_B getClientePorId(@PathVariable("id")String  id){
