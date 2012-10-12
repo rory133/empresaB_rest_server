@@ -361,16 +361,23 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		
 		logger.info(" en getClienteHTML por login  ##### " +login);
 		
+		Cliente_B clientTemp =(Cliente_B)cliente_BServiceImpl.findByCliente_B_login_usuario_b(login);
+		if(null!=clientTemp){		
+			Integer id=clientTemp.getIdusuarios_b();
+			logger.info(" en getClienteHTML por login  #####  el id obtenido con cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b() es "  +id);
+			Cliente_B clientTemp2= cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
+			return clientTemp2;
+		}
 		
-		Integer id=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b();
-		logger.info(" en getClienteHTML por login  #####  el id obtenido con cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b() es "  +id);
 		
-		Cliente_B clientTemp= cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
-		
-		logger.info("en getClienteHTML por login  ##### imprimo nombre cliente optendio con cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id)); "+clientTemp.getNombre_b());
+		//logger.info("en getClienteHTML por login  ##### imprimo nombre cliente optendio con cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id)); "+clientTemp.getNombre_b());
 		
 		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
-		return clientTemp;
+		
+		//Cliente_B clientTemp=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login);
+		
+		
+		return null;
 
 
 	
