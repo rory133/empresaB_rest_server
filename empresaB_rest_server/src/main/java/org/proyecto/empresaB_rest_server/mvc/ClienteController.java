@@ -63,7 +63,7 @@ public class ClienteController {
 
 
 	
-	protected static Logger logger = Logger.getLogger("*en Cliente_B_BController*");
+	protected static Logger logger = Logger.getLogger("*en Cliente_B_BController*en servidor#######");
 	
 	
 	
@@ -71,7 +71,9 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.GET, params="new")
 	public ModelAndView addContact() {
 		logger.info("metodo get --new-- ");
+		logger.info("inicio de addContact en servidor####### ");
 		return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()  );
+		
 
 	  }
 	
@@ -156,7 +158,7 @@ public class ClienteController {
 public @ResponseBody void updateCliente(@PathVariable ("id") String id, @RequestBody Cliente_B cliente_b) {
 
 
-		logger.info("inicio de updateCliente_B en servidor####### ");
+		logger.info("en servido inicio de updateCliente_B r####### ");
 
 		cliente_BServiceImpl.update(cliente_b);
 
@@ -176,7 +178,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		
 		logger.info("inicio de addCliente_B en servidor####### ");
 	
-	
+		
 		
 		cliente_b.setFecha_alta_b(new Date());
 		cliente_b.setAUTHORITY("ROLE_CLIENTE");
@@ -201,7 +203,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 				headers="Accept=application/xml, application/json")
 	
 	public @ResponseBody  ListaClientes_B listadoClientes_B(){
-		logger.info("en listaClientes REST server ####");
+		logger.info("enServidor en listadoClientes REST server ####");
 		//List<Cliente_B> clientes_b=cliente_BServiceImpl.findAll();
 
 		ListaClientes_B lista=new ListaClientes_B();
@@ -270,7 +272,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	@RequestMapping(value="/cliente/edit",method=RequestMethod.GET)
 	public ModelAndView editCliente_B_form(String id){
 
-
+		logger.info("en editCliente_B_form en servidor####### ");
 		logger.info("id cliente pasado a edit-modificar: "+id);
 		Cliente_B cliente_b= new Cliente_B();
 		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
@@ -287,7 +289,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) throws Exception{
 
 		
-		logger.info("inicio de modCliente_B_form");
+		logger.info("en Servidor en modCliente_B_form #####:");
 		Usuario_B usuarioBuscado=cliente_BServiceImpl.findByCliente_B_login_usuario_b(cliente_b.getLogin_usuario_b());
 		Integer idusuarioBuscado=null;
 		if (null!=usuarioBuscado){
@@ -359,7 +361,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 			headers="Accept=application/xml, application/json")
 	public @ResponseBody Cliente_B getClientePorLogin(@PathVariable("login")String  login){
 		
-		logger.info(" en getClienteHTML por login  ##### " +login);
+		logger.info(" en Servidor en getClientePorLogin por login  ##### " +login);
 		
 		Cliente_B clientTemp =(Cliente_B)cliente_BServiceImpl.findByCliente_B_login_usuario_b(login);
 		if(null!=clientTemp){		
@@ -388,7 +390,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 			headers="Accept=application/xml, application/json")
 	public @ResponseBody Cliente_B getClientePorId(@PathVariable("id")String  id){
 		
-		logger.info(" en getClienteHTML por id  ##### " +id);
+		logger.info(" en servidor en getClientePorId  ##### " +id);
 		
 		Cliente_B clientTemp= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
 		
@@ -413,12 +415,14 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	
 	
 	
-	
+	//un cliente modifica los valores de su cuenta
 	@RequestMapping(value="/cliente/modificarMiCuenta_B/", method = RequestMethod.GET)
 	public ModelAndView modMiCuenta_B_form(@RequestParam(value="login")String  login) throws Exception{
 		
 		
 		Integer id=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b();
+		
+		logger.info("en servidor  en modMiCuente_B_from ####### ");
 		
 		//http://localhost:8080/empresaB/clientes/cliente/edit?id=id
 
@@ -434,7 +438,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 			, method = RequestMethod.DELETE,
 			headers="Accept=application/xml, application/json")
 	public @ResponseBody void delCliente_B_form(@PathVariable("id")String  id){
-		logger.info(" en getClienteHTML DELETE por id  ##### " +id);
+		logger.info(" en delcliente_B_form DELETE por id  ##### " +id);
 		
 		Cliente_B cliente_b= new Cliente_B();
 		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);

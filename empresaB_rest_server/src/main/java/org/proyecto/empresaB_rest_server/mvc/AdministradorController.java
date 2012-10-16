@@ -13,6 +13,8 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.model.Administrador_B;
+import org.proyecto.empresaB_rest_server.model.ListaAdministradores_B;
+import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
 import org.proyecto.empresaB_rest_server.service.impl.Administrador_BServiceImpl;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,7 +50,7 @@ public class AdministradorController {
 
 
 	
-	protected static Logger logger = Logger.getLogger("*en Administrador_B_BController*");
+	protected static Logger logger = Logger.getLogger("*en Administrador_B_BControlleren servidor#######*");
 	
 	
 	
@@ -55,6 +58,7 @@ public class AdministradorController {
 	@RequestMapping(method = RequestMethod.GET, params="new")
 	public ModelAndView addContact() {
 		logger.info("metodo get --new-- ");
+		logger.info("inicio de addContact en servidor####### ");
 		return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()  );
 
 	  }
@@ -86,8 +90,22 @@ public class AdministradorController {
 	
 	
 	
+	//devolvemos una lista con todos los clientes
+@RequestMapping(value="/administradores",
+				method=RequestMethod.GET, 
+				headers="Accept=application/xml, application/json")
 	
+	public @ResponseBody  ListaAdministradores_B listadoAdministradores_B(){
+		logger.info("enServidor en listadoClientes REST server ####");
+		//List<Cliente_B> clientes_b=cliente_BServiceImpl.findAll();
+
+		ListaAdministradores_B lista=new ListaAdministradores_B();
+		lista.setDataAdministrador(administrador_BServiceImpl.findAll());
 	
+
+	   return lista;
+	}
+/*	
 	@RequestMapping(value="/listado",method=RequestMethod.GET)
 	public ModelAndView listadoAdministrador_B(){
 		List<Administrador_B> lista =administrador_BServiceImpl.findAll();
@@ -99,7 +117,7 @@ public class AdministradorController {
 	   return new ModelAndView("administrador_b/listaAdministradores","administradores", lista);
 	}
 	
-	
+	*/
 	@RequestMapping(value="/edit",method=RequestMethod.GET)
 	public ModelAndView editAdministrador_B_form(String id){
 

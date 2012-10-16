@@ -11,7 +11,11 @@ import javax.persistence.Column;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlRootElement
+@XmlType(propOrder = {"idusuarios_b", "login_usuario_b","nombre_b","apellidos_b","dni_nif_b","email_b","AUTHORITY","ENABLED","password_b","cargo_b","matricula_b"})
 
 @Entity
 @Table(name = "administrador_b")
