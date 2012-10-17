@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.commons.io.FileUtils;
@@ -32,6 +33,8 @@ import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.bo.Producto_BBo;
 import org.proyecto.empresaB_rest_server.bo.impl.Producto_BBoImpl;
 import org.proyecto.empresaB_rest_server.exception.GenericException;
+import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
+import org.proyecto.empresaB_rest_server.model.ListaProductos_B;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.service.Productos_BService;
 import org.proyecto.empresaB_rest_server.service.impl.Productos_BServiceImpl;
@@ -67,6 +70,29 @@ public class Producto_BController {
 	
 	
 	
+	
+	@RequestMapping(value="/productos",
+			method=RequestMethod.GET, 
+			headers="Accept=application/xml, application/json")
+
+public @ResponseBody  ListaProductos_B listadoProductos_B(){
+	logger.info("enServidor en listadoProductos REST server ####");
+	//List<Cliente_B> clientes_b=cliente_BServiceImpl.findAll();
+
+	ListaProductos_B lista=new ListaProductos_B();
+	lista.setDataProducto(productos_BServiceImpl.getProductos_B());
+
+
+   return lista;
+}
+	
+	
+	
+	
+	
+	
+	
+/*	
 	@RequestMapping(value="/listado",method=RequestMethod.GET)
 	public ModelAndView listadoProductos_B(){
 		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
@@ -78,6 +104,13 @@ public class Producto_BController {
 	   return new ModelAndView("producto_b/listaProductos","productos", lista);
 	}
 	
+	*/
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/listado2",method=RequestMethod.GET, headers={"Accept=application/xml, application/json"})
 	public List<Producto_B> listado2Productos_B(){
@@ -87,6 +120,11 @@ public class Producto_BController {
 		return lista;
 	   //return new ModelAndView("producto_b/listaProductos","productos", lista);
 	}
+	
+	
+	
+	
+	
 	
 	/*@RequestMapping(value = "/add", method = RequestMethod.GET)*/
 	@RequestMapping(value="/admin/" ,method = RequestMethod.GET, params="new")
