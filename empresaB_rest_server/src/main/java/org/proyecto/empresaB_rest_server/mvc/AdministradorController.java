@@ -275,7 +275,22 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 }
 	
 	
+	@RequestMapping(value="/administrador/{id}"
+			, method = RequestMethod.DELETE,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody void delAdministrador_B_form(@PathVariable("id")String  id){
+		logger.info(" en deladministrador_B_form DELETE por id  ##### " +id);
+		
+		Administrador_B administrador_b= new Administrador_B();
+		administrador_b= administrador_BServiceImpl.findByAdministrador_BIdAdministrador_b(id);
+		logger.info(" en getClienteHTML DELETE por id ya encontrado cliente  ##### ");
+		administrador_BServiceImpl.delete(administrador_b);
+			
+		logger.info("##### borrando administrador : ");
+	}	
 	
+	
+/*	
 	@RequestMapping(value="/borrar",method=RequestMethod.GET)
 	public ModelAndView delAdministrador_B_form(String id){
 		logger.info(" en borrrar administrador ");
@@ -289,7 +304,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 
 		return new ModelAndView("redirect:listado");
 
-}
+}*/
 	
 
 }
