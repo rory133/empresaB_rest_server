@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -247,6 +248,36 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		
 		
 	}
+	
+	//acutalizamos un producto
+	@RequestMapping(value="/admin/producto",
+					method = RequestMethod.PUT,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody String updateProducto_B_form(@RequestBody Producto_B producto_b) {
+		productos_BServiceImpl.update(producto_b);
+		String idPruducto=String.valueOf(producto_b.getIdproductob());
+		
+		//devolvemos el id delproducto recien creado
+		return idPruducto;
+		
+		
+		
+	}
+	
+	//encontramos un pruduto por su id
+	@RequestMapping(value="/producto/{id}"
+			, method = RequestMethod.GET,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody Producto_B getProductoPorId(@PathVariable("id")String  id){
+		
+		logger.info(" en servidor en getProductoPorId  ##### " +id);
+		
+		Producto_B pruductoTemp= productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		return pruductoTemp;
+
+	}
+	
+	
 	
 /*	
 	@RequestMapping(value="/admin/crearProductoB",method = RequestMethod.POST)
