@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>hola</h1>
+<h1>ARRANCADO SERVIDOR</h1>
 
 <%-- <c:redirect url="inicio.htm" /> --%>
-<c:redirect url="productos/listado" />
+<%-- <c:redirect url="productos/listado" /> --%>
 </body>
 </html>

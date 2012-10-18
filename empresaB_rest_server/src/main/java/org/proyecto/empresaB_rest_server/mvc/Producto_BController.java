@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,7 @@ import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.bo.Producto_BBo;
 import org.proyecto.empresaB_rest_server.bo.impl.Producto_BBoImpl;
 import org.proyecto.empresaB_rest_server.exception.GenericException;
+import org.proyecto.empresaB_rest_server.model.Cliente_B;
 import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
 import org.proyecto.empresaB_rest_server.model.ListaProductos_B;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
@@ -70,7 +72,7 @@ public class Producto_BController {
 	
 	
 	
-	
+	//enviamos a cliente la lista de todos los productos
 	@RequestMapping(value="/productos",
 			method=RequestMethod.GET, 
 			headers="Accept=application/xml, application/json")
@@ -109,7 +111,7 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 	
 	
 	
-	
+	/*
 	
 	
 	@RequestMapping(value="/listado2",method=RequestMethod.GET, headers={"Accept=application/xml, application/json"})
@@ -121,14 +123,14 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 	   //return new ModelAndView("producto_b/listaProductos","productos", lista);
 	}
 	
-	
+	*/
 	
 	
 	
 	
 	/*@RequestMapping(value = "/add", method = RequestMethod.GET)*/
 	@RequestMapping(value="/admin/" ,method = RequestMethod.GET, params="new")
-	public ModelAndView addContact() {
+	public ModelAndView addProducto() {
 		logger.info("metodo get --new-- ");
 		return new ModelAndView("producto_b/edit", "producto_b",new Producto_B());
 	  }
@@ -230,9 +232,23 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 }
 	
 	
-	//@RequestMapping(value="/crearProductoB", method = RequestMethod.POST)
 	
-	//public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image, HttpServletRequest request){
+	//creamos un nuevo producto
+	@RequestMapping(value="/admin/producto",
+					method = RequestMethod.POST,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody String addProducto_B_form(@RequestBody Producto_B producto_b) {
+		productos_BServiceImpl.save(producto_b);
+		String idPruducto=String.valueOf(producto_b.getIdproductob());
+		
+		//devolvemos el id delproducto recien creado
+		return idPruducto;
+		
+		
+		
+	}
+	
+/*	
 	@RequestMapping(value="/admin/crearProductoB",method = RequestMethod.POST)
 	public ModelAndView addProducto_B_form(@Valid @ModelAttribute("producto_b")Producto_B producto_b, BindingResult  result,@RequestParam(value="image",required=false)MultipartFile image) throws Exception{
 
@@ -245,25 +261,7 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 
 		}
 
-		/*				CODIGO DE CUANDO NO MOSTRABA LAS Ñs---
-		logger.info("addProducto_B_form ------NO tiene errores----");
-		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
-		//productos_BServiceImpl.save(producto_b);
-		logger.info("addProducto_B_form ");
-		
-		
-		String nombre =producto_b.getNombre_productoB();
-		try {
-		logger.info("el nombre insertado en try antes de cambio"+nombre);
-		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
-		
-		logger.info("el nombre insertado en try despue de cambio"+nombre);
-		} catch(UnsupportedEncodingException uee) {
-		    uee.printStackTrace();
-		}
-		logger.info("el nombre insertado en add-save fuera try"+nombre);
-		producto_b.setNombre_productoB(nombre);
-		*/
+
 		
 		if(image.isEmpty())
 		productos_BServiceImpl.save(producto_b);
@@ -274,18 +272,14 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		try{
 			if(!image.isEmpty()){
 				productos_BServiceImpl.save(producto_b);
-				//byte[] bFile = new byte[image.getBytes().length];
+		
 				logger.info("antes de validar imagen en addProducto_B_form");
 				validarImagen (image);
 				logger.info("despues de validar imagen en addProducto_B_form");
 				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 				saveImage(producto_b.getIdproductob()+".jpg",image);
 				
-				//producto_b.setImagen_b(bFile);
-/*				logger.info("request.getparametrermap"+request.getParameterMap().toString());
 
-				logger.info("request.getPathInfo()"+ request.getPathInfo());
-				logger.info("request.getPathTranslated()" + request.getPathTranslated());*/
 				
 				logger.info("salvando imagen "+ producto_b.getIdproductob() +"en try ");
 			}
@@ -300,15 +294,8 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		
 		logger.info("addProducto_B_form ");
 		
-		
-		
-/*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		return new ModelAndView("producto_b/listaProductos","productos", lista);*/
 		return new ModelAndView("redirect:../listado");
-		
-		
-	
-}
+}*/
 	
 	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delProducto_B_form(String id){

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
@@ -239,7 +240,7 @@ public class Producto_B implements Serializable{
 
 
 
-
+	@XmlTransient
 	public Set<Producto_BSeleccionado> getProductos_b_seleccionados() {
 		return productos_b_seleccionados;
 	}
