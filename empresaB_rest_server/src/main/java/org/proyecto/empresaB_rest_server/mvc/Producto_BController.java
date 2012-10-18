@@ -262,7 +262,7 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 	
 	
 	
-	//acutalizamos un producto
+	//actutalizamos un producto
 	@RequestMapping(value="/admin/producto",
 					method = RequestMethod.PUT,
 					headers="Accept=application/xml, application/json")

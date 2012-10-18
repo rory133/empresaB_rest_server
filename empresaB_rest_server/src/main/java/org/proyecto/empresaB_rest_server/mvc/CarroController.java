@@ -38,9 +38,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -76,6 +78,48 @@ public class CarroController {
 	
 	
 	protected static Logger logger = Logger.getLogger("*en CarroController*");
+	
+	
+	//creamos un nuevo carro
+	@RequestMapping(value="/carro_b",
+					method = RequestMethod.POST,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody Carro_B addCarro_B_form(@RequestBody Carro_B carro_b2) {
+		Carro_B carro_b =new Carro_B();
+		carro_BService.save(carro_b);
+		
+		//devolvemos el id delproducto recien creado
+		return carro_b;
+
+	}
+	
+	//actutalizamos un carro
+	@RequestMapping(value="/carro_b",
+					method = RequestMethod.PUT,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody Carro_B updateCarro_B_form(@RequestBody Carro_B carro_b) {
+
+		carro_BService.update(carro_b);
+		//devolvemos el id delproducto recien creado
+		return carro_b;
+	
+	}
+	
+	
+	//borramos un carro
+	@RequestMapping(value="/carro_b",
+					method = RequestMethod.DELETE,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody void deleteCarro_B_form(@RequestBody Carro_B carro_b) {
+
+		carro_BService.delete(carro_b);
+		//devolvemos el id delproducto recien creado
+		
+	
+	}
+	
+	
+	
 	
 	@RequestMapping(value="/sumaProducto", method = RequestMethod.GET)
 	public ModelAndView sumaProducto(@RequestParam(value="cantidad")String cantidad, @RequestParam(value="idProducto")String  idProducto, HttpSession session) throws Exception{

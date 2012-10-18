@@ -22,10 +22,11 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 
-
+@XmlRootElement(name="carro_b")
 @Entity
 /*@Component
 @Scope("session")*/
