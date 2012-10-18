@@ -244,10 +244,23 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		
 		//devolvemos el id delproducto recien creado
 		return idPruducto;
-		
-		
-		
+
 	}
+	
+	@RequestMapping(value="/producto/{id}"
+			, method = RequestMethod.DELETE,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody void delProducto_B(@PathVariable("id")String  id){
+		logger.info("SERVIDOR en delProducto_B DELETE por id  ##### " +id);
+		
+		Producto_B producto_b= new Producto_B();
+		producto_b=productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		
+		productos_BServiceImpl.delete(producto_b);
+		logger.info("##### borrando producto : ");
+	}
+	
+	
 	
 	//acutalizamos un producto
 	@RequestMapping(value="/admin/producto",
@@ -327,7 +340,7 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		
 		return new ModelAndView("redirect:../listado");
 }*/
-	
+/*	
 	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
 	public ModelAndView delProducto_B_form(String id){
 
@@ -337,14 +350,12 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 		
 		logger.info("borrando producto : "+productob.getNombre_productoB());
 		productos_BServiceImpl.delete(productob);
-		
-/*		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		return new ModelAndView("producto_b/listaProductos","productos", lista);*/
+
 		return new ModelAndView("redirect:../listado");
-		//return new ModelAndView("producto_b/modificar", "producto_b",productob);
+		
 	
 }
-	
+	*/
 
    //private void saveImage(String filename, MultipartFile image)throws RuntimeException{
 	private void saveImage(String filename, MultipartFile image)throws GenericException{
