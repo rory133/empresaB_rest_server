@@ -66,14 +66,14 @@ public class Producto_BController {
 	
 
 	
-	protected static Logger logger = Logger.getLogger("*en Producto_BController*");
+	protected static Logger logger = Logger.getLogger("*en Producto_BController*SERVER####");
 		
 	
 	
 	
 	
 	
-	//enviamos a cliente la lista de todos los productos
+//enviamos a cliente la lista de todos los productos
 	@RequestMapping(value="/productos",
 			method=RequestMethod.GET, 
 			headers="Accept=application/xml, application/json")
@@ -90,7 +90,67 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 }
 	
 	
+//creamos un nuevo producto
+	@RequestMapping(value="/admin/producto",
+					method = RequestMethod.POST,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody String addProducto_B_form(@RequestBody Producto_B producto_b) {
+		productos_BServiceImpl.save(producto_b);
+		String idPruducto=String.valueOf(producto_b.getIdproductob());
+		
+		//devolvemos el producto recien creado
+		return idPruducto;
+
+	}
+//borramos un producto
+	@RequestMapping(value="/producto/{id}"
+			, method = RequestMethod.DELETE,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody void delProducto_B(@PathVariable("id")String  id){
+		logger.info("SERVIDOR en delProducto_B DELETE por id  ##### " +id);
+		
+		Producto_B producto_b= new Producto_B();
+		producto_b=productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		
+		productos_BServiceImpl.delete(producto_b);
+		logger.info("##### borrando producto : ");
+	}
 	
+	
+	
+//actutalizamos un producto
+	@RequestMapping(value="/admin/producto",
+					method = RequestMethod.PUT,
+					headers="Accept=application/xml, application/json")
+	public @ResponseBody String updateProducto_B_form(@RequestBody Producto_B producto_b) {
+		productos_BServiceImpl.update(producto_b);
+		logger.info("SERVIDOR en updateProducto_B_form se acaba de actualiza producto, con nombre"+producto_b.getNombre_productoB());
+		logger.info("SERVIDOR en updateProducto_B_form se acaba de actualiza producto, con cantidad"+producto_b.getCantidad_existencias());
+		String idProducto=String.valueOf(producto_b.getIdproductob());
+		
+		//devolvemos el id delproducto recien actualizado
+		return idProducto;
+		
+		
+		
+	}
+	
+//encontramos un producto por su id
+	@RequestMapping(value="/producto/{id}"
+			, method = RequestMethod.GET,
+			headers="Accept=application/xml, application/json")
+	public @ResponseBody Producto_B getProductoPorId(@PathVariable("id")String  id){
+		
+		logger.info(" en servidor en getProductoPorId  ##### " +id);
+		
+		Producto_B pruductoTemp= productos_BServiceImpl.findByProducto_BIdProducto_b(id);
+		return pruductoTemp;
+
+	}
+	
+
+		
+
 	
 	
 	
@@ -233,63 +293,7 @@ public @ResponseBody  ListaProductos_B listadoProductos_B(){
 }
 	
 	
-	
-	//creamos un nuevo producto
-	@RequestMapping(value="/admin/producto",
-					method = RequestMethod.POST,
-					headers="Accept=application/xml, application/json")
-	public @ResponseBody String addProducto_B_form(@RequestBody Producto_B producto_b) {
-		productos_BServiceImpl.save(producto_b);
-		String idPruducto=String.valueOf(producto_b.getIdproductob());
-		
-		//devolvemos el id delproducto recien creado
-		return idPruducto;
 
-	}
-	
-	@RequestMapping(value="/producto/{id}"
-			, method = RequestMethod.DELETE,
-			headers="Accept=application/xml, application/json")
-	public @ResponseBody void delProducto_B(@PathVariable("id")String  id){
-		logger.info("SERVIDOR en delProducto_B DELETE por id  ##### " +id);
-		
-		Producto_B producto_b= new Producto_B();
-		producto_b=productos_BServiceImpl.findByProducto_BIdProducto_b(id);
-		
-		productos_BServiceImpl.delete(producto_b);
-		logger.info("##### borrando producto : ");
-	}
-	
-	
-	
-	//actutalizamos un producto
-	@RequestMapping(value="/admin/producto",
-					method = RequestMethod.PUT,
-					headers="Accept=application/xml, application/json")
-	public @ResponseBody String updateProducto_B_form(@RequestBody Producto_B producto_b) {
-		productos_BServiceImpl.update(producto_b);
-		String idPruducto=String.valueOf(producto_b.getIdproductob());
-		
-		//devolvemos el id delproducto recien creado
-		return idPruducto;
-		
-		
-		
-	}
-	
-	//encontramos un pruduto por su id
-	@RequestMapping(value="/producto/{id}"
-			, method = RequestMethod.GET,
-			headers="Accept=application/xml, application/json")
-	public @ResponseBody Producto_B getProductoPorId(@PathVariable("id")String  id){
-		
-		logger.info(" en servidor en getProductoPorId  ##### " +id);
-		
-		Producto_B pruductoTemp= productos_BServiceImpl.findByProducto_BIdProducto_b(id);
-		return pruductoTemp;
-
-	}
-	
 	
 	
 /*	

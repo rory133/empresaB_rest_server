@@ -23,6 +23,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 
@@ -95,7 +96,7 @@ public class Carro_B implements Serializable{
 		this.fecha_b = fecha_b;
 	}
 
-
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "carro_b")
 	public Set<Producto_BSeleccionado> getProducto_BSeleccionado() {
 		return producto_BSeleccionado;
@@ -108,7 +109,7 @@ public class Carro_B implements Serializable{
 		this.producto_BSeleccionado = producto_BSeleccionado;
 	}
 	
-	
+	//@XmlTransient
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcliente", nullable = false)
 	public Cliente_B getCliente_b() {
