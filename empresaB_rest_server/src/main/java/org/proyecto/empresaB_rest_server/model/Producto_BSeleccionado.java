@@ -1,6 +1,7 @@
 package org.proyecto.empresaB_rest_server.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,11 +30,10 @@ public class Producto_BSeleccionado implements Serializable {
 	private static final long serialVersionUID = -5527566206302296042L;
 	
 	 private Integer idproductoSeleccionado;
-	  private Integer cantidad;
-
-	  private Producto_B producto_b;
-	  private Carro_B carro_b;
-
+	 private Integer cantidad;
+	 private Producto_B producto_b;
+	 private Carro_B carro_b;
+	 private BigDecimal subTotal;
 	  
 	  
 	  
@@ -42,13 +42,7 @@ public class Producto_BSeleccionado implements Serializable {
 		}
 	  
 	
-	  
-
-
-
-
-
-	
+	  	
 	@Column(name = "CANTIDAD")
 	public Integer getCantidad() {
 		return cantidad;
@@ -60,7 +54,15 @@ public class Producto_BSeleccionado implements Serializable {
 
 
 
+	@Column(name = "SUBTOTAL")
+	  public BigDecimal getSubTotal() {
+		return subTotal;
+	}
 
+
+	public void setSubTotal(BigDecimal subTotal) {
+		this.subTotal = subTotal;
+	}
 	
 	
 
