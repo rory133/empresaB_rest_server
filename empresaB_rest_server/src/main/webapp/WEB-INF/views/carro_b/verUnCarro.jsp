@@ -48,6 +48,7 @@ h4 {color:#B40431;}
 	<th>IMAGEN</th>
     <th>CODIGO PRODUCTO</th>
     <th>CANTIDAD PEDIDA</th>
+    <th>SUBTOTAL</th>
     <sec:authorize access="hasRole('ROLE_ADMIN')">   
     <th>ELIMINAR</th>
     </sec:authorize>
@@ -85,7 +86,9 @@ h4 {color:#B40431;}
         </td>
         
 
-
+        <td>
+                ${productosSeleccionados.subTotal}
+        </td>
         
         <sec:authorize access="hasRole('ROLE_CLIENTE')">
 

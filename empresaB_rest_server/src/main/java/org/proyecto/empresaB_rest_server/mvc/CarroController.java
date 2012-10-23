@@ -97,7 +97,7 @@ public class CarroController {
 
 	}
 	
-	//actutalizamos un carro
+	//actualizamos un carro
 	@RequestMapping(value="/carro_b",
 					method = RequestMethod.PUT,
 					headers="Accept=application/xml, application/json")
@@ -150,7 +150,25 @@ public @ResponseBody  ListaCarros_B listadoCarros_B(){
    return lista;
 }
 	
+//realizamos pago carro
+@RequestMapping(value="/pagarCarro",
+				method = RequestMethod.PUT,
+				headers="Accept=application/xml, application/json")
+
+public void pagarCarro( @RequestBody Carro_B carro_b) {
 	
+	logger.info("marcando carro como pagado REST server #### id: "+ carro_b.getIdcarro_b());
+	
+	
+	carro_b.setPagado(true);
+	carro_BService.update(carro_b);
+	
+	String content="apreciado usuario le informamos que el pago de su pedido numero "+carro_b.getIdcarro_b()+" se ha realizado con exito, en breve le informaremos al realziar el envio";
+	String subject="pedido: "+carro_b.getIdcarro_b();		
+	mail.sendMail( carro_b.getCliente_b().getLogin_usuario_b(), content, carro_b.getCliente_b().getEmail_b(), subject);
+
+
+}
 	
 	
 	
@@ -562,7 +580,7 @@ public @ResponseBody  ListaCarros_B listadoCarros_B(){
 		return mav;
 	}
 	@RequestMapping(value="/pagarCarro", method = RequestMethod.GET)
-	public ModelAndView pagarCarro( @RequestParam(value="idCarro")String  idCarro,@RequestParam(value="total")String  total) throws Exception{
+	public ModelAndView pagarCarro2( @RequestParam(value="idCarro")String  idCarro,@RequestParam(value="total")String  total) throws Exception{
 		
 		
 		carro_b=carro_BService.findByCarro_BIdCarro_b(idCarro);
