@@ -40,9 +40,11 @@ public class Producto_BSeleccionadoDaoImpl extends CustomHibernateDaoSupport imp
 	}
 	@SuppressWarnings("unchecked")
 	public Producto_BSeleccionado findByProducto_BSeleccionadoIdProducto_b(String producto_BSeleccionadoIdProducto_b) {
-		
+	
 		List<Producto_BSeleccionado> list = getHibernateTemplate().find(
-                     "from Producto_BSeleccionado where IDPRODUCTOB = ?",Integer.parseInt(producto_BSeleccionadoIdProducto_b));
+                     "from Producto_BSeleccionado where IDPRODUCTOSELECCIONADO = ?",Integer.parseInt(producto_BSeleccionadoIdProducto_b));
+					//"from Producto_BSeleccionado where IDPRODUCTOB = ?",Integer.parseInt(producto_BSeleccionadoIdProducto_b));
+		
 		return (Producto_BSeleccionado)list.get(0);
 	}
 	
