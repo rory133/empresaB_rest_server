@@ -2,18 +2,13 @@ package org.proyecto.empresaB_rest_server.bo.impl;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+
 import org.proyecto.empresaB_rest_server.bo.Producto_BBo;
 import org.proyecto.empresaB_rest_server.dao.Producto_BDao;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
-import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -24,8 +19,7 @@ public class Producto_BBoImpl implements Producto_BBo{
 	@Autowired
 	Producto_BDao producto_BDao;
 
-	 @Autowired
-	 private SessionFactory sessionFactory;
+
 	
 	public void setProducto_BDao(Producto_BDao producto_BDao) {
 		this.producto_BDao = producto_BDao;

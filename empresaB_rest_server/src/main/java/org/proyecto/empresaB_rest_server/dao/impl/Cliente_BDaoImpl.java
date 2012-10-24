@@ -1,19 +1,12 @@
 package org.proyecto.empresaB_rest_server.dao.impl;
 
 
-import org.hibernate.criterion.Restrictions;
+
 import org.proyecto.empresaB_rest_server.dao.Cliente_BDao;
 import org.proyecto.empresaB_rest_server.model.Cliente_B;
-import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
 import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
-
 import java.util.List;
-
-import javax.validation.Validator;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 

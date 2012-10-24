@@ -4,18 +4,9 @@ import org.proyecto.empresaB_rest_server.dao.Carro_BDao;
 import org.proyecto.empresaB_rest_server.model.Carro_B;
 import org.proyecto.empresaB_rest_server.model.Producto_BSeleccionado;
 import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
-
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 //@Repository("Carro_BDao")
 

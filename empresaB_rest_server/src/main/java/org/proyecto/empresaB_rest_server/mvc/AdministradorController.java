@@ -1,38 +1,24 @@
 package org.proyecto.empresaB_rest_server.mvc;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+
 
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.model.Administrador_B;
-import org.proyecto.empresaB_rest_server.model.Cliente_B;
+
 import org.proyecto.empresaB_rest_server.model.ListaAdministradores_B;
-import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
-import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
 import org.proyecto.empresaB_rest_server.service.impl.Administrador_BServiceImpl;
-import org.proyecto.empresaB_rest_server.service.impl.Productos_BServiceImpl;
-import org.proyecto.empresaB_rest_server.util.ListaProvincias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 

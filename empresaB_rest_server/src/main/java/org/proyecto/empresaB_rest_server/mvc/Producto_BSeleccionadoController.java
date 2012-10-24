@@ -1,12 +1,9 @@
 package org.proyecto.empresaB_rest_server.mvc;
 
 import org.apache.log4j.Logger;
-import org.proyecto.empresaB_rest_server.model.Carro_B;
 import org.proyecto.empresaB_rest_server.model.ListaProductos_BSeleccionados;
-import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Producto_BSeleccionado;
 import org.proyecto.empresaB_rest_server.service.impl.Producto_BSeleccionadoServiceImpl;
-import org.proyecto.empresaB_rest_server.service.impl.Productos_BServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

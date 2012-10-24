@@ -2,40 +2,19 @@ package org.proyecto.empresaB_rest_server.mvc;
 
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.proyecto.empresaB_rest_server.model.Cliente_B;
-
 import org.proyecto.empresaB_rest_server.model.ListaClientes_B;
-import org.proyecto.empresaB_rest_server.model.ListaUsuarios_B;
-import org.proyecto.empresaB_rest_server.model.Producto_B;
-import org.proyecto.empresaB_rest_server.model.Usuario_B;
 import org.proyecto.empresaB_rest_server.service.Cliente_BService;
-import org.proyecto.empresaB_rest_server.service.impl.Cliente_BServiceImpl;
-import org.proyecto.empresaB_rest_server.service.impl.Productos_BServiceImpl;
-import org.proyecto.empresaB_rest_server.util.ListaProvincias;
 import org.proyecto.empresaB_rest_server.util.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -49,14 +28,10 @@ public class ClienteController {
 	
 	@Autowired
 	private Cliente_BService cliente_BServiceImpl;
-	
-	@Autowired
-	private Productos_BServiceImpl productos_BServiceImpl;
+
 	
 	
-	@Autowired
-	ServletContext context;
-	
+
 	@Autowired
 	private Mail mail;
 	
@@ -137,24 +112,6 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 
 
 	
-	@RequestMapping(value="/cliente/edit",method=RequestMethod.GET)
-	public ModelAndView editCliente_B_form(String id){
-
-		logger.info("en editCliente_B_form en servidor####### ");
-		logger.info("id cliente pasado a edit-modificar: "+id);
-		Cliente_B cliente_b= new Cliente_B();
-		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
-					
-		logger.info("cliente pasado a edit-modificar: "+cliente_b.getNombre_b());
-		
-		
-		//List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		//return new ModelAndView("producto_b/listaProductos","productos", lista);
-		return new ModelAndView("cliente_b/modificar", "cliente_b",cliente_b);
-	
-}
-
-
 	
 	
 	//buscamos y devolvemos un clientes por su login

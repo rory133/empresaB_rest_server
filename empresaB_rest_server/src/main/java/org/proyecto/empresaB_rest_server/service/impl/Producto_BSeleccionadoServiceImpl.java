@@ -2,14 +2,13 @@ package org.proyecto.empresaB_rest_server.service.impl;
 
 import java.util.List;
 
-import org.proyecto.empresaB_rest_server.bo.Producto_BBo;
+
 import org.proyecto.empresaB_rest_server.dao.Producto_BSeleccionadoDao;
-import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.model.Producto_BSeleccionado;
 import org.proyecto.empresaB_rest_server.service.Producto_BSeleccionadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 
 

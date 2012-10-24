@@ -6,13 +6,9 @@ import org.proyecto.empresaB_rest_server.bo.Cliente_BBo;
 import org.proyecto.empresaB_rest_server.dao.Cliente_BDao;
 import org.proyecto.empresaB_rest_server.model.Cliente_B;
 import org.proyecto.empresaB_rest_server.model.Usuario_B;
-import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
 
 
 

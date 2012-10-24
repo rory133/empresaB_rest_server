@@ -1,28 +1,20 @@
 package org.proyecto.empresaB_rest_server.service.impl;
 
 import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.proyecto.empresaB_rest_server.bo.Producto_BBo;
-import org.proyecto.empresaB_rest_server.dao.Producto_BDao;
 import org.proyecto.empresaB_rest_server.model.Producto_B;
 import org.proyecto.empresaB_rest_server.service.Productos_BService;
-import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.annotation.Propagation;
+
 
 
 
 
 
 @Service("productoService")
-/*@Transactional(propagation=Propagation.SUPPORTS, readOnly=false)*/
-/*@Transactional(propagation=Propagation.SUPPORTS)*/
+
 
 public class Productos_BServiceImpl implements Productos_BService{
 	@Autowired
