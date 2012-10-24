@@ -57,14 +57,7 @@ public class AdministradorController {
 	
 	
 	
-	
-	@RequestMapping(method = RequestMethod.GET, params="new")
-	public ModelAndView addContact() {
-		logger.info("metodo get --new-- ");
-		logger.info("inicio de addContact en servidor####### ");
-		return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()  );
 
-	  }
 	
 	
 	
@@ -88,35 +81,8 @@ public class AdministradorController {
 
 
 	}
-	
-	
-	
-	
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addAdministrador_B_form(@Valid @ModelAttribute("administrador_b")Administrador_B administrador_b, BindingResult  result)throws Exception {
 
-		
-		logger.info("inicio de addAdministrador_B_form");
-		if(result.hasErrors()) {
-		logger.info("addAdministrador_B_form ------tiene errores----"+result.toString());
-		logger.info("errores: "+result.toString());
-		 return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()).addAllObjects(result.getModel());
 
-		}
-	
-		logger.info("addAdministrador_B_form ");
-	
-		administrador_b.setAUTHORITY("ROLE_ADMIN");
-		administrador_b.setENABLED(true);
-		administrador_BServiceImpl.save(administrador_b);
-
-		return new ModelAndView("redirect:listado");
-}
-	
-	
-	
-	
 	//devolvemos una lista con todos los administradores
 @RequestMapping(value="/administradores",
 				method=RequestMethod.GET, 
@@ -132,19 +98,7 @@ public class AdministradorController {
 
 	   return lista;
 	}
-/*	
-	@RequestMapping(value="/listado",method=RequestMethod.GET)
-	public ModelAndView listadoAdministrador_B(){
-		List<Administrador_B> lista =administrador_BServiceImpl.findAll();
-		logger.info("en listadoProductos_B2*");
-		
-		logger.info("tamaño lista en listado: "+lista.size());
-		
 
-	   return new ModelAndView("administrador_b/listaAdministradores","administradores", lista);
-	}
-	
-	*/
 
 //buscamos y devolvemos un administrador por su id
 	@RequestMapping(value="/administrador/{id}"
@@ -192,71 +146,7 @@ public class AdministradorController {
 		return new ModelAndView("administrador_b/modificar", "administrador_b",administrador_b);
 	
 }
-	@RequestMapping(value="/modificarAdministrador_B", method = RequestMethod.POST)
-	public ModelAndView modAdministrador_B_form(@Valid @ModelAttribute("administrador_b")Administrador_B administrador_b, BindingResult  result) throws Exception{
 
-		Usuario_B usuarioBuscado=administrador_BServiceImpl.findByAdministrador_B_login_usuario_b(administrador_b.getLogin_usuario_b());
-		Integer idusuarioBuscado=null;
-		if (null!=usuarioBuscado){
-		idusuarioBuscado=usuarioBuscado.getIdusuarios_b();
-		}
-		Integer idadministrador_b=administrador_b.getIdusuarios_b();
-		
-	
-		//if (null !=usuarioBuscado){
-			
-		if ((null !=usuarioBuscado)&& (idusuarioBuscado==idadministrador_b)){
-			result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
-			logger.info("null !=usuarioBuscado"+(null !=usuarioBuscado));
-
-			
-		}
-		
-		
-		logger.info("inicio de modAdministrador_B_form");
-		if(result.hasErrors()) {
-		logger.info("modAdministrador_B_form ------tiene errores----"+result.toString());
-		logger.info("errores: "+result.toString());
-		 return new ModelAndView("administrador_b/edit", "administrador_b",new Administrador_B()).addAllObjects(result.getModel());
-
-		}
-	
-
-	/*		CODIGO DE CUANDO NO MOSTRABA Ñss
-		logger.info("modificarProducto_B_form ------NO tiene errores----");
-		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
-		//productos_BServiceImpl.save(producto_b);
-		logger.info("modificarProducto_B_form ");
-		String nombre =producto_b.getNombre_productoB();
-		//String nombre =new String();
-		try {
-		logger.info("el nombre insertado en try antes de cambio: "+nombre);
-		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
-		//nombre =new String (producto_b.getNombre_productoB().getBytes("UTF-8"),"ISO-8859-1");
-		//nombre =new String (nombre1.getBytes("ISO-8859-1"),"UTF-8");
-		
-		logger.info("el nombre insertado en try despue de cambio: "+nombre);
-		} catch(UnsupportedEncodingException uee) {
-		    uee.printStackTrace();
-		}
-		
-		
-		logger.info("el nombre modificado-update fuera try: "+nombre);
-		producto_b.setNombre_productoB(nombre);
-		
-		*/
-
-		logger.info("modAdministrador_B_form ");
-		
-		administrador_b.setAUTHORITY("ROLE_ADMIN");
-		administrador_b.setENABLED(true);
-		administrador_BServiceImpl.update(administrador_b);
-
-		return new ModelAndView("redirect:listado");
-		
-	
-	
-	}
 	
 	//actualizamos un cliente
 	@RequestMapping(value="/administrador/{id}",
@@ -274,7 +164,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 
 }
 	
-	
+	//borrar administrador
 	@RequestMapping(value="/administrador/{id}"
 			, method = RequestMethod.DELETE,
 			headers="Accept=application/xml, application/json")
@@ -290,21 +180,7 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 	}	
 	
 	
-/*	
-	@RequestMapping(value="/borrar",method=RequestMethod.GET)
-	public ModelAndView delAdministrador_B_form(String id){
-		logger.info(" en borrrar administrador ");
-		logger.info("en borrar con ide con id: "+id);
-		Administrador_B administrador_b= new Administrador_B();
-		administrador_b= administrador_BServiceImpl.findByAdministrador_BIdAdministrador_b(id);
-		logger.info(" con administrador : "+administrador_b.getNombre_b());
-		administrador_BServiceImpl.delete(administrador_b);
-		
-		logger.info("borrando administrador : "+administrador_b.getNombre_b());
 
-		return new ModelAndView("redirect:listado");
-
-}*/
 	
 
 }

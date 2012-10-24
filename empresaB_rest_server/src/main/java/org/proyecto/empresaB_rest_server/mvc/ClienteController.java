@@ -68,89 +68,9 @@ public class ClienteController {
 	
 	
 	
-	@RequestMapping(method = RequestMethod.GET, params="new")
-	public ModelAndView addContact() {
-		logger.info("metodo get --new-- ");
-		logger.info("inicio de addContact en servidor####### ");
-		return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()  );
-		
 
-	  }
 	
-	
-	
-/*	
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView addCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result)throws Exception {
 
-		
-		logger.info("inicio de addCliente_B_form");
-		if (null !=cliente_BServiceImpl.findByCliente_B_login_usuario_b(cliente_b.getLogin_usuario_b()))
-		result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
-		//	result.addError(new ObjectError(result.getObjectName(), "este usuario ya existe!"));
-		if(result.hasErrors()) {
-		logger.info("addCliente_B_form ------tiene errores----"+result.toString());
-		logger.info("errores: "+result.toString());
-	
-		 return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
-
-		}
-	
-		logger.info("addCliente_B_form ");
-		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setAUTHORITY("ROLE_CLIENTE");
-		cliente_b.setENABLED(true);
-		logger.info("se ha sumado cliente "+cliente_b.getNombre_b());
-		cliente_BServiceImpl.save(cliente_b);
-
-		//return new ModelAndView("redirect:listado");
-		return new ModelAndView("home");
-		
-		return new ModelAndView("producto_b/listaProductos");
-		
-		
-		String content="apreciado usuario gracias por darse de alta en nuestra página ahora pordrá realizar los pedidos que desee";
-		String subject="realizada correctamente alta en empresa_b";		
-		mail.sendMail(cliente_b.getLogin_usuario_b(), content, cliente_b.getEmail_b(), subject);
-		
-		
-		
-		List<Producto_B> lista =productos_BServiceImpl.getProductos_B();
-		return new ModelAndView("producto_b/listaProductos","productos", lista);
-		
-}
-	
-*/	
-	
-	
-	
-	
-/*	@RequestMapping(value="/admin/listado",method=RequestMethod.GET)
-	public ModelAndView listadoClientes_B(){
-		List<Cliente_B> lista =cliente_BServiceImpl.findAll();
-		logger.info("en listadoProductos_B2*");
-		
-		logger.info("tamaño lista en listado: "+lista.size());
-		
-
-	   return new ModelAndView("cliente_b/listaClientes","clientes", lista);
-	}*/
-	
-	//, headers={"Accept=text/xml, text/html, application/json, application/xml"}
-	
-/*	
-	@RequestMapping(value="/listado",method=RequestMethod.GET)	
-	public @ResponseBody  ListaClientes_B listadoClientes_B(){
-		logger.info("en listaClientes REST*");
-		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
-		logger.info("tamaño clienetes:  "+clientes.size());
-		ListaClientes_B result =new ListaClientes_B();		
-		result.setClientes_b(clientes);
-		logger.info("tamaño result  "+result.getClientes_b().size());
-	   return result;
-	}
-	*/
-	
 	//actualizamos un cliente
 	@RequestMapping(value="/cliente/{id}",
 			method = RequestMethod.PUT,
@@ -169,6 +89,8 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 
 
 }
+	
+	
 	//creamos un nuevo cliente
 	@RequestMapping(value="/cliente",
 					method = RequestMethod.POST,
@@ -212,62 +134,8 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 
 	   return lista;
 	}
-	
-/*	
-	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers="Accept=application/xml, application/json")
-	
-	public @ResponseBody List<Cliente_B> listadoClientes_B(){
-		logger.info("en listaClientes REST*");
-		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
-		logger.info("tamaño clienetes:  "+clientes.size());
-	
 
-	   return clientes;
-	}
-	*/
-	
-	
-/*	
-	///funicona con curl
-	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers = "Accept=application/json")
-	public @ResponseBody  List<Cliente_B> listadoClientes_B(){
-		logger.info("en listaClientes REST*");
-		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
-		logger.info("tamaño clienetes:  "+clientes.size());
-	
 
-	   return clientes;
-	}
-	*/
-/*	
-	//funciona en navegador
-	@RequestMapping(value="/clientes",method=RequestMethod.GET, headers = "Accept=application/json")	
-	public @ResponseBody  ListaClientes_B listadoClientes_B(){
-		logger.info("en listaClientes REST*");
-		List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
-		logger.info("tamaño clienetes:  "+clientes.size());
-		ListaClientes_B result =new ListaClientes_B();		
-		result.setClientes_b(clientes);
-		logger.info("tamaño result  "+result.getClientes_b().size());
-	   return result;
-	}
-	
-	*/
-	
-/*	
-	@RequestMapping(value="/clientes",method=RequestMethod.GET)	
-	public @ResponseBody  ListaClientes_B listadoClientes_B(){
-		logger.info("en listaClientes REST*");
-		//List<Cliente_B> clientes=cliente_BServiceImpl.findAll();
-		//logger.info("tamaño clienetes:  "+clientes.size());
-		ListaClientes_B result =new ListaClientes_B(cliente_BServiceImpl.findAll());		
-		//result.setClientes_b(clientes);
-		
-	  // return result;
-	   return result;
-	   
-	}
-	*/
 	
 	@RequestMapping(value="/cliente/edit",method=RequestMethod.GET)
 	public ModelAndView editCliente_B_form(String id){
@@ -285,74 +153,8 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		return new ModelAndView("cliente_b/modificar", "cliente_b",cliente_b);
 	
 }
-	@RequestMapping(value="/cliente/modificarCliente_B", method = RequestMethod.POST)
-	public ModelAndView modCliente_B_form(@Valid @ModelAttribute("cliente_b")Cliente_B cliente_b, BindingResult  result) throws Exception{
 
-		
-		logger.info("en Servidor en modCliente_B_form #####:");
-		Usuario_B usuarioBuscado=cliente_BServiceImpl.findByCliente_B_login_usuario_b(cliente_b.getLogin_usuario_b());
-		Integer idusuarioBuscado=null;
-		if (null!=usuarioBuscado){
-		idusuarioBuscado=usuarioBuscado.getIdusuarios_b();
-		}
-		Integer idcliente_b=cliente_b.getIdusuarios_b();
 
-				
-		logger.info("inicio de modCliente_B_form idusuarioBuscado "+idusuarioBuscado);
-		logger.info("inicio de modCliente_B_form idcliente_b "+idcliente_b);
-		
-		
-		logger.info("inicio de modCliente_B_form id usuarioBuscado "+usuarioBuscado.getIdusuarios_b());
-		logger.info("inicio de modCliente_B_form id cliente_B "+cliente_b.getIdusuarios_b());
-		if ((null !=usuarioBuscado)&& (idusuarioBuscado==idcliente_b)){
-			result.addError(new ObjectError("loginInvalido", "Este usuario ya existe"));
-			logger.info("null !=usuarioBuscado"+(null !=usuarioBuscado));
-			logger.info("((usuarioBuscado.getIdusuarios_b())!=(cliente_b.getIdusuarios_b()))"+((usuarioBuscado.getIdusuarios_b())!=(cliente_b.getIdusuarios_b())));
-			
-		}
-		if(result.hasErrors()) {
-		logger.info("modCliente_B_form ------tiene errores----"+result.toString());
-		logger.info("errores: "+result.toString());
-		 return new ModelAndView("cliente_b/edit", "cliente_b",new Cliente_B()).addAllObjects(result.getModel());
-
-		}
-	
-
-	/*		CODIGO DE CUANDO NO MOSTRABA Ñss
-		logger.info("modificarProducto_B_form ------NO tiene errores----");
-		logger.info("nombre producto a añadir "+ producto_b.getNombre_productoB());
-		//productos_BServiceImpl.save(producto_b);
-		logger.info("modificarProducto_B_form ");
-		String nombre =producto_b.getNombre_productoB();
-		//String nombre =new String();
-		try {
-		logger.info("el nombre insertado en try antes de cambio: "+nombre);
-		nombre =new String (producto_b.getNombre_productoB().getBytes("ISO-8859-1"),"UTF-8");
-		//nombre =new String (producto_b.getNombre_productoB().getBytes("UTF-8"),"ISO-8859-1");
-		//nombre =new String (nombre1.getBytes("ISO-8859-1"),"UTF-8");
-		
-		logger.info("el nombre insertado en try despue de cambio: "+nombre);
-		} catch(UnsupportedEncodingException uee) {
-		    uee.printStackTrace();
-		}
-		
-		
-		logger.info("el nombre modificado-update fuera try: "+nombre);
-		producto_b.setNombre_productoB(nombre);
-		
-		*/
-
-		logger.info("modCliente_B_form ");
-		cliente_b.setFecha_alta_b(new Date());
-		cliente_b.setAUTHORITY("ROLE_CLIENTE");
-		cliente_b.setENABLED(true);
-		cliente_BServiceImpl.update(cliente_b);
-
-		//return new ModelAndView("redirect:../admin/listado");
-		return new ModelAndView("redirect:../../productos/listado");
-	
-	
-	}
 	
 	
 	//buscamos y devolvemos un clientes por su login
@@ -371,12 +173,6 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 			return clientTemp2;
 		}
 		
-		
-		//logger.info("en getClienteHTML por login  ##### imprimo nombre cliente optendio con cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id)); "+clientTemp.getNombre_b());
-		
-		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
-		
-		//Cliente_B clientTemp=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login);
 		
 		
 		return null;
@@ -398,42 +194,11 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		
 		
 		return clientTemp;
-		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
-		
-		
-		//return cliente_BServiceImpl.findByCliente_BIdCliente_b(String.valueOf(id));
 
-		//return new ModelAndView("redirect:../edit?id="+String.valueOf(id));
-		//return new ModelAndView("redirect:../edit?"+id);
-	
 	
 	}
-	
-	
-	
-	
-	
-	
-	
-	//un cliente modifica los valores de su cuenta
-	@RequestMapping(value="/cliente/modificarMiCuenta_B/", method = RequestMethod.GET)
-	public ModelAndView modMiCuenta_B_form(@RequestParam(value="login")String  login) throws Exception{
-		
-		
-		Integer id=cliente_BServiceImpl.findByCliente_B_login_usuario_b(login).getIdusuarios_b();
-		
-		logger.info("en servidor  en modMiCuente_B_from ####### ");
-		
-		//http://localhost:8080/empresaB/clientes/cliente/edit?id=id
 
-		logger.info(" en modMiCuenta_B_form " +String.valueOf(id));
 
-		return new ModelAndView("redirect:../edit?id="+String.valueOf(id));
-		//return new ModelAndView("redirect:../edit?"+id);
-	
-	
-	}
-	
 	@RequestMapping(value="/cliente/{id}"
 			, method = RequestMethod.DELETE,
 			headers="Accept=application/xml, application/json")
@@ -448,23 +213,6 @@ public @ResponseBody void updateCliente(@PathVariable ("id") String id, @Request
 		logger.info(" en getClienteHTML DELETE por id ya borrado cliente  ##### ");
 		logger.info("##### borrando cliente : ");
 	}
-	
-	
-/*	
-	@RequestMapping(value="/admin/borrar",method=RequestMethod.GET)
-	public ModelAndView delCliente_B_form(String id){
-		logger.info(" en borrrar cliente ");
-		logger.info("en borrar con ide con id: "+id);
-		Cliente_B cliente_b= new Cliente_B();
-		cliente_b= cliente_BServiceImpl.findByCliente_BIdCliente_b(id);
-		logger.info(" con cliente : "+cliente_b.getNombre_b());
-		cliente_BServiceImpl.delete(cliente_b);
-		
-		logger.info("borrando cliente : "+cliente_b.getNombre_b());
 
-		return new ModelAndView("redirect:listado");
-
-}
-*/	
 
 }

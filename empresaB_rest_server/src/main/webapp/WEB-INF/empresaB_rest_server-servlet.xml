@@ -18,21 +18,7 @@
 
 
 
-        
-  <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="viewResolver"> 
 
-	<property name="viewClass">
-		<value> org.springframework.web.servlet.view.tiles2.TilesView </value> 
-	</property>
-
-</bean>
-        
- <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
- <property name="definitions"> 
-        <list> 
-            <value>/WEB-INF/views/tiles-defs.xml</value>
-        </list> </property>
-  </bean>
 	
 
 
