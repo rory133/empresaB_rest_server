@@ -208,6 +208,7 @@
 	<dependency>
 		<groupId>javax.servlet.jsp</groupId>
 		<artifactId>jsp-api</artifactId>
+		   <scope>provided</scope>
 		<version>2.1</version>
 	</dependency>
 	<dependency>
