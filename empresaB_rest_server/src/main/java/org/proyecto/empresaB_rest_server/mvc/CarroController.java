@@ -110,6 +110,8 @@ public @ResponseBody  ListaCarros_B listadoCarros_B(){
 	
 	ListaCarros_B lista=new ListaCarros_B();
 	lista.setDataCarro(carro_BService.findAll());
+	if (lista.getDataCarro().isEmpty())
+		lista=null;
 	
    return lista;
 }
