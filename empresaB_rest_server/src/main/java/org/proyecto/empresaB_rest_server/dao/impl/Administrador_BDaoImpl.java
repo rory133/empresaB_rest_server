@@ -6,6 +6,9 @@ import org.proyecto.empresaB_rest_server.model.Usuario_B;
 import org.proyecto.empresaB_rest_server.util.CustomHibernateDaoSupport;
 
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +20,11 @@ import org.springframework.stereotype.Repository;
 //de Hibernate con la anotacion @Autowired
 @Repository("administrador_BDao")
 public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements Administrador_BDao {
-
+        @Autowired
+	 private SessionFactory sessionFactory;
 	public void save(Administrador_B administrador_B) {
-		getHibernateTemplate().save(administrador_B);
+		//getHibernateTemplate().save(administrador_B);
+                this.sessionFactory.getCurrentSession().save(administrador_B);
 	
 	}
 
@@ -27,20 +32,28 @@ public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements
 
 	public void update(Administrador_B administrador_B) {
 		//getHibernateTemplate().update(administrador_B);
-		getHibernateTemplate().merge(administrador_B);
-		
+		//getHibernateTemplate().merge(administrador_B);
+                this.sessionFactory.getCurrentSession().merge(administrador_B);
 	}
 
 	public void delete(Administrador_B administrador_B) {
-		getHibernateTemplate().delete(administrador_B);
+		//getHibernateTemplate().delete(administrador_B);
+                this.sessionFactory.getCurrentSession().delete(administrador_B);
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	public Administrador_B findByAdministrador_BIdAdministrador_b(String administrador_BIdAdministrador_b) {
-		List<Administrador_B> list = getHibernateTemplate().find(
+             /*
+               List<Administrador_B> list = getHibernateTemplate().find(
                      "from Administrador_B where idusuarios_b = ?",Integer.parseInt(administrador_BIdAdministrador_b));
 		return (Administrador_B)list.get(0);
+                */
+                
+                List <Administrador_B> list = sessionFactory.getCurrentSession().createCriteria (Administrador_B.class )
+                        .add(Restrictions.eq("idusuarios_b",Integer.parseInt(administrador_BIdAdministrador_b)))
+                        .list();
+                return list.get(0);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -48,10 +61,17 @@ public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements
 /*		List <Administrador_B> list = getHibernateTemplate().find(
                 "from Administrador_B where login_usuario_b = ?",administrador_B_login_usuario_b);
 		return (Administrador_B)list.get(0);*/
-		
+		/*
 		List <Usuario_B> list= getHibernateTemplate().find(
  				"from Usuario_B  where login_usuario_b = ?",administrador_B_login_usuario_b);
 		System.out.println("tamaño lista encontrada: "+list.size());
+                */
+                
+              List <Usuario_B> list = sessionFactory.getCurrentSession().createCriteria (Usuario_B.class )
+                        .add(Restrictions.eq("login_usuario_b",administrador_B_login_usuario_b))
+                        .list();
+                
+                
 		if(list.isEmpty())
 			return null;
 		return (Usuario_B)list.get(0);
@@ -59,8 +79,15 @@ public class Administrador_BDaoImpl extends CustomHibernateDaoSupport implements
 
 	@SuppressWarnings("unchecked")
 	public List<Administrador_B> findAll (){
-		List <Administrador_B> list = getHibernateTemplate().find("from Administrador_B");
-		return list;
+            
+            
+            
+            return sessionFactory.getCurrentSession().createCriteria (Administrador_B.class )
+                                     .list();
+            
+            
+		//List <Administrador_B> list = getHibernateTemplate().find("from Administrador_B");
+		//return list;
 	}
 
 }

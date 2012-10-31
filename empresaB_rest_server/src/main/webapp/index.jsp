@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ARRANCADO SERVIDOR</h1>
+<h1>ARRANCADO SERVIDOR index webapp</h1>
 
 <%-- <c:redirect url="inicio.htm" /> --%>
 <%-- <c:redirect url="productos/listado" /> --%>
